@@ -1,4 +1,21 @@
 # kahoot-clone-nodejs
+
+project forked from https://github.com/ethanbrimhall/kahoot-clone-nodejs
+
+### Changes
+- added Docker deployment (node & mongo containers)
+- parametrized mongodb url
+
+### How to start
+
+1. Clone repo ```git clone https://github.com/ovimihai/kahoot-clone-nodejs.git```
+2. Start with ```bash run.sh```
+3. Navigate to `http://{YOUR_HOST}:3000`
+4. Create new game `http://{YOUR_HOST}:3000/create/`
+5. Share to players `http://{YOUR_HOST}:3000/host/?id=x`
+
+## Original Readme
+
 <h3>INSTRUCTIONS:</h3>
 <ol>
   <li>Install MongoDB: 'Sudo apt-get install mongodb'</li>
