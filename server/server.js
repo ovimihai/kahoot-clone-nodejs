@@ -16,9 +16,12 @@ var games = new LiveGames();
 var players = new Players();
 
 //Mongodb setup
+const mongoHost = process.env.MONGO_HOST || 'localhost';
+const mongoPort = process.env.MONGO_PORT || '27017';
+
 var MongoClient = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
-var url = "mongodb://localhost:27017/";
+let url = `mongodb://${mongoHost}:${mongoPort}/`;
 
 
 
@@ -415,11 +418,11 @@ io.on('connection', (socket) => {
                         }
                         
                         io.to(game.pin).emit('GameOver', {
-                            num1: first.name,
-                            num2: second.name,
-                            num3: third.name,
-                            num4: fourth.name,
-                            num5: fifth.name
+                            num1: first.name + ' - ' + first.score,
+                            num2: second.name + ' - ' + second.score,
+                            num3: third.name + ' - ' + third.score,
+                            num4: fourth.name + ' - ' + fourth.score,
+                            num5: fifth.name + ' - ' + fifth.score
                         });
                     }
                 });
