@@ -265,7 +265,27 @@ io.on('connection', (socket) => {
     
     socket.on('getScore', function(){
         var player = players.getPlayer(socket.id);
-        socket.emit('newScore', player.gameData.score); 
+        socket.emit('newScore', player.gameData.score);
+
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("kahootDB");
+
+            playerData = {
+                "hostId": player.hostId,
+                "playerId": player.playerId,
+                "playerName": player.name,
+                "score": player.gameData.score,
+                "answer": player.gameData.answer,
+            }
+
+            dbo.collection("kahootPlayers").insertOne(playerData, function(err, res) {
+                    if (err) throw err;
+                    db.close();
+                });
+            db.close();
+        });
+
     });
     
     socket.on('time', function(data){
